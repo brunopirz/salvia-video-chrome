@@ -14,12 +14,26 @@
     --red: #ff3355; --cyan: #00bbff; --cyan-soft: rgba(0,187,255,.12);
     --purple: #8866ff; --orange: #ff8800; --amber: #ffaa00;
     --accent: #ff2244; --accent-soft: rgba(255,34,68,.12);
+    --shadow: 0 10px 40px rgba(0,0,0,0.5);
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  [data-theme="light"] {
+    --bg: #f2f2f7; --bg-deep: #e5e5ea;
+    --surface: #ffffff; --surface-el: #f9f9fb; --surface-hover: #f0f0f5;
+    --text: #1c1c1e; --text-muted: rgba(28,28,30,.55);
+    --border: rgba(0,0,0,.08); --border-strong: rgba(0,0,0,.15);
+    --green: #00b060; --green-soft: rgba(0,176,96,.12);
+    --red: #e02040; --cyan: #0088cc; --cyan-soft: rgba(0,136,204,.12);
+    --purple: #7744ee; --orange: #ee6600; --amber: #dd9900;
+    --accent: #e02040; --accent-soft: rgba(224,32,64,.12);
+    --shadow: 0 10px 40px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s; }
   body {
     background: var(--bg); color: var(--text);
-    background-image: radial-gradient(ellipse at 50% 0%, rgba(255,34,68,.08) 0%, transparent 60%);
-    font-family: -apple-system, 'Segoe UI', sans-serif; min-height: 100vh;
+    background-image: radial-gradient(ellipse at 50% 0%, var(--accent-soft) 0%, transparent 60%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; min-height: 100vh;
   }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 26px 20px 70px; }
   header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -35,7 +49,7 @@
 
   .colunas { display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: start; }
   @media (max-width: 860px) { .colunas { grid-template-columns: 1fr; } }
-  .painel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+  .painel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
   h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px; }
 
   /* biblioteca */
@@ -95,7 +109,13 @@
   .saida { display: flex; align-items: center; gap: 10px; background: var(--surface-el); border: 1px solid var(--border); border-radius: 10px; padding: 8px 13px; font-size: 12.5px; }
   .saida a { color: var(--green); text-decoration: none; margin-left: auto; }
   .oculto { display: none; }
-
+  
+  .btn-tema { 
+    background: var(--surface); border: 1px solid var(--border); color: var(--text); 
+    border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; 
+    justify-content: center; cursor: pointer; margin-left: 10px; font-size: 14px;
+  }
+  .btn-tema:hover { background: var(--surface-hover); border-color: var(--border-strong); }
 
 </style>
 </head>
@@ -105,6 +125,7 @@
     <h1>Salvia Video</h1>
     <div class="by">Estúdio de voz IA 100% local</div>
     <div class="chip" id="chip">conectando...</div>
+    <button class="btn-tema" id="btnTema" title="Alternar tema">🌙</button>
   </header>
 
   <div class="colunas">
@@ -161,6 +182,19 @@
 
 
 <script>
+// Tema (Claro / Escuro)
+const temaSalvo = localStorage.getItem('tema') || 'dark';
+document.documentElement.setAttribute('data-theme', temaSalvo);
+document.getElementById('btnTema').textContent = temaSalvo === 'light' ? '☀️' : '🌙';
+
+document.getElementById('btnTema').onclick = () => {
+  const atual = document.documentElement.getAttribute('data-theme');
+  const novo = atual === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', novo);
+  localStorage.setItem('tema', novo);
+  document.getElementById('btnTema').textContent = novo === 'light' ? '☀️' : '🌙';
+};
+
 // links editáveis (também podem vir do manifesto da VPS, sem nova versão)
 const LINK_YOUTUBE = 'https://www.youtube.com';
 const LINK_DISCORD = 'https://discord.com';
