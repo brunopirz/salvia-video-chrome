@@ -39,8 +39,7 @@
   header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
   h1 {
     font-size: 30px; letter-spacing: 1.5px; font-weight: 800;
-    background: linear-gradient(135deg, #fff 0%, var(--orange) 50%, var(--accent) 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+    color: var(--green);
   }
   .by { font-size: 12px; color: var(--text-muted); }
   .by a { color: var(--accent); text-decoration: none; }
@@ -156,7 +155,7 @@
     <div>
       <div class="painel">
         <h2>Estúdio</h2>
-        <div class="voz-selecionada">Voz selecionada: <b id="vozAtual">Voz padrão</b></div>
+        <div class="voz-selecionada">Voz selecionada: <b id="vozAtual">Nenhuma</b></div>
         <textarea id="texto" placeholder="Cole aqui o roteiro que a voz vai narrar..."></textarea>
         <div class="ajustes">
           <div class="slider">Emoção <input type="range" id="emocao" min="0" max="100" value="50"></div>
@@ -238,14 +237,7 @@ function desenharVozes() {
   const div = $('vozes');
   div.innerHTML = '';
 
-  const padrao = document.createElement('div');
-  padrao.className = 'voz' + (vozAtiva === '' ? ' ativa' : '');
-  padrao.innerHTML = `<div class="avatar" style="background:linear-gradient(135deg,#fff,#ff8800,#ff2244)">LC</div>
-    <div class="voz-info"><div class="voz-nome">Voz padrão</div><div class="voz-tags">nativa do motor</div></div>
-    <button class="icone play" title="ouvir">▶</button>`;
-  padrao.onclick = () => { vozAtiva = ''; desenharVozes(); };
-  padrao.querySelector('.play').onclick = e => { e.stopPropagation(); tocarAmostra('_padrao', e.target); };
-  if (filtro === 'todos' && 'voz padrão'.includes(termo)) div.appendChild(padrao);
+
 
   const filtradas = vozes.filter(v =>
     (filtro === 'todos' || (filtro === 'fav' ? v.favorita : v.genero === filtro)) &&
@@ -277,7 +269,7 @@ function desenharVozes() {
       e.stopPropagation();
       if (!confirm(`Apagar a voz "${v.nome}"?`)) return;
       await api(`/api/vozes/${encodeURIComponent(v.nome)}`, { method: 'DELETE' });
-      if (vozAtiva === v.nome) { vozAtiva = ''; $('vozAtual').textContent = 'Voz padrão'; }
+      if (vozAtiva === v.nome) { vozAtiva = ''; $('vozAtual').textContent = 'Nenhuma'; }
       carregarVozes();
     };
     div.appendChild(el);
