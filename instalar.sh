@@ -36,50 +36,15 @@ fi
 # Atualizar pip
 .venv/bin/pip install -q --upgrade pip
 
-# 3. Instalar PyTorch
-GPU="cpu"
-if command -v nvidia-smi &> /dev/null && nvidia-smi -L &> /dev/null; then
-    echo "Placa NVIDIA detectada! Instalando PyTorch com CUDA..."
-    GPU="cuda"
-fi
-
-echo "[2/4] Instalando PyTorch e torchaudio..."
-if [ "$GPU" = "cuda" ]; then
-    .venv/bin/pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
-else
-    echo "Sem placa NVIDIA detectada ou ativa. Instalando PyTorch para CPU (mais lento, porém menor)..."
-    .venv/bin/pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
-fi
-
-if [ $? -ne 0 ]; then
-    echo "[ERRO] Falha ao instalar o PyTorch. Verifique sua conexão com a internet."
-    exit 1
-fi
-
 # 4. Instalar motor de voz e dependências
 echo "[3/4] Instalando as dependências do Lugnis Clone Voice..."
-.venv/bin/pip install chatterbox-tts fastapi "uvicorn[standard]" python-multipart "setuptools<81"
+.venv/bin/pip install fastapi "uvicorn[standard]" python-multipart "setuptools<81"
 if [ $? -ne 0 ]; then
     echo "[ERRO] Falha ao instalar as dependências. Verifique sua internet."
     exit 1
 fi
 
-# 5. Garantir o runtime do Pyarmor para Linux
-if [ ! -f "pyarmor_runtime_000000/pyarmor_runtime.so" ]; then
-    echo "[4/4] Gerando módulo de runtime do Pyarmor para Linux..."
-    .venv/bin/pip install -q pyarmor
-    .venv/bin/pyarmor gen runtime --platform linux.x86_64 -O temp_runtime >/dev/null 2>&1
-    if [ -f "temp_runtime/pyarmor_runtime_000000/pyarmor_runtime.so" ]; then
-        cp temp_runtime/pyarmor_runtime_000000/pyarmor_runtime.so pyarmor_runtime_000000/
-        rm -rf temp_runtime
-        echo "Módulo de runtime do Pyarmor configurado."
-    else
-        echo "[AVISO] Não foi possível compilar o runtime automaticamente. Tentando prosseguir..."
-        rm -rf temp_runtime
-    fi
-else
-    echo "[4/4] Módulo de runtime do Pyarmor para Linux já configurado."
-fi
+
 
 # Verificar ffmpeg
 if ! command -v ffmpeg &> /dev/null; then
@@ -95,7 +60,7 @@ fi
 
 # Verificação final
 echo "Verificando a instalação..."
-.venv/bin/python -c "import torch, chatterbox; print('       PyTorch', torch.__version__, '+ motor de voz: OK')"
+.venv/bin/python -c "import fastapi; print('       FastAPI: OK')"
 if [ $? -eq 0 ]; then
     echo ""
     echo "============================================"
