@@ -1,8 +1,8 @@
 #!/bin/bash
-# Script de Instalação do Salvia Video para Linux
+# Script de Instalação do Lugnis Clone Voice para Linux
 
 echo "============================================"
-echo "    Salvia Video - Instalação (Linux)"
+echo "    Lugnis Clone Voice - Instalação (Linux)"
 echo "============================================"
 echo ""
 
@@ -57,7 +57,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 4. Instalar motor de voz e dependências
-echo "[3/4] Instalando o motor de voz Chatterbox e dependências..."
+echo "[3/4] Instalando as dependências do Lugnis Clone Voice..."
 .venv/bin/pip install chatterbox-tts fastapi "uvicorn[standard]" python-multipart "setuptools<81"
 if [ $? -ne 0 ]; then
     echo "[ERRO] Falha ao instalar as dependências. Verifique sua internet."

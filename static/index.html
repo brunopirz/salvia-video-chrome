@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salvia Video</title>
+<title>Lugnis Clone Voice</title>
 <style>
   :root {
     --bg: #07070f; --bg-deep: #040408;
@@ -122,7 +122,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>Salvia Video</h1>
+    <h1>Lugnis Clone Voice</h1>
     <div class="by">Estúdio de voz IA 100% local</div>
     <div class="chip" id="chip">conectando...</div>
     <button class="btn-tema" id="btnTema" title="Alternar tema">🌙</button>
@@ -240,7 +240,7 @@ function desenharVozes() {
 
   const padrao = document.createElement('div');
   padrao.className = 'voz' + (vozAtiva === '' ? ' ativa' : '');
-  padrao.innerHTML = `<div class="avatar" style="background:linear-gradient(135deg,#fff,#ff8800,#ff2244)">SV</div>
+  padrao.innerHTML = `<div class="avatar" style="background:linear-gradient(135deg,#fff,#ff8800,#ff2244)">LC</div>
     <div class="voz-info"><div class="voz-nome">Voz padrão</div><div class="voz-tags">nativa do motor</div></div>
     <button class="icone play" title="ouvir">▶</button>`;
   padrao.onclick = () => { vozAtiva = ''; desenharVozes(); };

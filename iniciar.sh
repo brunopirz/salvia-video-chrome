@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script para iniciar o Salvia Video no Linux
+# Script para iniciar o Lugnis Clone Voice no Linux
 
 cd "$(dirname "$0")"
 
@@ -17,5 +17,5 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Iniciando o Salvia Video..."
+echo "Iniciando o Lugnis Clone Voice..."
 .venv/bin/python run.py

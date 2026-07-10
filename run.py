@@ -15,5 +15,5 @@ if hasattr(app, 'chamar_licencas'):
 app.licenca_estado['estado'] = 'ativa'
 
 if __name__ == "__main__":
-    print("Iniciando Salvia Video com bypass de licença...")
+    print("Iniciando Lugnis Clone Voice com bypass de licença...")
     uvicorn.run(app.app, host="127.0.0.1", port=8765)

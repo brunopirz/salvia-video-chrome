@@ -46,4 +46,4 @@ for f in sorted(audios):
     )
     print(f"  ✓ {nome} {'(' + genero + ')' if genero else ''}")
 
-print("\nPronto! Recarregue a página do Salvia Video.")
+print("\nPronto! Recarregue a página do Lugnis Clone Voice.")

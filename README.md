@@ -1,4 +1,4 @@
-# Salvia Video
+# Lugnis Clone Voice
 
 100% local and free AI voice studio. Generate narration in Portuguese and clone any voice with just 10 seconds of audio.
 
@@ -71,7 +71,7 @@ Requisitos: Python 3.12, ffmpeg, ~4 GB livres.
 ## Structure / Estrutura
 
 - `app.py`: FastAPI server + TTS engine / Servidor FastAPI + motor TTS (Pyarmor compiled/ofuscado)
-- `static/index.html`: Web interface / Interface web do Salvia Video
+- `static/index.html`: Web interface / Interface web do Lugnis Clone Voice
 - `vozes/`: Library of reference voices / Biblioteca de vozes de referência (wav 24 kHz mono)
 - `saidas/`: Generated audios / Áudios gerados
 - `teste_motor.py`: TTS engine smoke test / Teste de fumaça do motor

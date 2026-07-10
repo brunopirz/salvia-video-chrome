@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title Salvia Video
+title Lugnis Clone Voice
 cd /d "%~dp0"
 set "PATH=%~dp0ffmpeg;%PATH%"
 set PYTHONUTF8=1

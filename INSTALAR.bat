@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 >nul
-title Salvia Video - Instalador
+title Lugnis Clone Voice - Instalador
 cd /d "%~dp0"
 
 echo ============================================
-echo    Salvia Video - Instalacao (Windows)
+echo    Lugnis Clone Voice - Instalacao (Windows)
 echo ============================================
 echo.
 
